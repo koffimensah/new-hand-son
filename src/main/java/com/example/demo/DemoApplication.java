@@ -23,6 +23,7 @@ public class DemoApplication {
                 "body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; text-align: center; }" +
                 "h1 { color: #4CAF50; }" +
                 "p { font-size: 18px; }" +
+                ".version { background-color: #ff5722; color: white; padding: 10px; font-weight: bold; }" +
                 ".message { background-color: #e7f3fe; border-left: 6px solid #2196F3; padding: 20px; display: inline-block; margin: 20px auto; }" +
                 ".dcp-message { background-color: #ffe0b2; border-left: 6px solid #ff9800; padding: 20px; margin: 20px auto; display: inline-block; }" +
                 "button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; font-size: 16px; }" +
@@ -30,17 +31,19 @@ public class DemoApplication {
                 "</style>" +
                 "</head>" +
                 "<body>" +
+                "<div class='version'>Version 2.0 - Deployed via Kubernetes! 🚀</div>" +
                 "<h1>Thank you, " + name + "!</h1>" +
                 "<div class='message'>" +
                 "<p>If you see this message, your offer letter is upcoming. Join the DCP (DevOps Career Path) – you're doing great!</p>" +
+                "<p><strong>NEW:</strong> You just successfully updated your app in Kubernetes!</p>" +
                 "</div>" +
                 "<div class='dcp-message'>" +
-                "<p><strong>Propose to all students:</strong> If you've deployed this app successfully, you’re ready to make 6figures! We provide comprehensive guidance, one-on-one mentorship, and exclusive resources to help you land your dream job in DevOps. Take the next step in your career with us!</p>" +
+                "<p><strong>Propose to all students:</strong> If you've deployed this app successfully, you're ready to make 6figures! We provide comprehensive guidance, one-on-one mentorship, and exclusive resources to help you land your dream job in DevOps. Take the next step in your career with us!</p>" +
                 "</div>" +
                 "<button onclick='showAlert()'>Click Me for a Surprise</button>" +
                 "<script>" +
                 "function showAlert() {" +
-                "  alert('You are awesome, " + name + "! Keep it up!');" +
+                "  alert('You are awesome, " + name + "! Keep it up! Version 2.0');" +
                 "}" +
                 "</script>" +
                 "</body>" +
