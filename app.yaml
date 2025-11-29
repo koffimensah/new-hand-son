@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: l2n-eks
-        image: hand-son-app:latest
+        image: koffimensah/hand-son-app:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 8080
