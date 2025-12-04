@@ -45,7 +45,7 @@ jobs:
         context: .
         push: true
         tags: |
-          # ${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:latest   <-- commented out
+          # ${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:latest   # commented out
           ${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:${{ github.sha }}
 
     - name: Image digest
@@ -53,13 +53,11 @@ jobs:
 
     - name: Import image to k3d
       run: |
-        # commented out latest tag
-        # k3d image import ${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:latest -c my-cluster
         k3d image import ${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:${{ github.sha }} -c my-cluster
 
-    - name: Update deployment image
+    - name: Update app.yaml image tag
       run: |
-        kubectl set image deployment/handson-deployment handson=${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:${{ github.sha }}
+        sed -i "s|hand-son-app:.*|hand-son-app:${GITHUB_SHA}|" app.yaml
 
     - name: Deploy to k3d
       run: |
