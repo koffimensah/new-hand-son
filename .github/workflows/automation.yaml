@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted  # ← Changed from ubuntu-latest
     
     steps:
     - name: Checkout code
@@ -41,3 +41,22 @@ jobs:
     
     - name: Image digest
       run: echo "Image pushed successfully!"
+    
+    # New steps for k3d deployment
+    - name: Import image to k3d
+      run: k3d image import ${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:latest -c my-cluster
+    
+    - name: Update deployment image
+      run: |
+        kubectl set image deployment/handson-deployment handson=${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:latest
+    
+    - name: Deploy to k3d
+      run: |
+        kubectl apply -f app.yaml
+        kubectl rollout restart deployment handson-deployment
+        kubectl rollout status deployment handson-deployment
+    
+    - name: Verify deployment
+      run: |
+        kubectl get pods
+        kubectl get svc
