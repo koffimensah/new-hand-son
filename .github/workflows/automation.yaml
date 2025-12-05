@@ -52,20 +52,26 @@ jobs:
       run: echo "Image pushed successfully!"
 
     - name: Import image to k3d
+      shell: bash
       run: |
         k3d image import ${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:${{ github.sha }} -c my-cluster
 
     - name: Update app.yaml image tag
+      shell: powershell
       run: |
-        sed -i "s|hand-son-app:.*|hand-son-app:${GITHUB_SHA}|" app.yaml
+        $content = Get-Content app.yaml -Raw
+        $newContent = $content -replace 'image: .*/hand-son-app:.*', "image: ${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:${{ github.sha }}"
+        Set-Content app.yaml $newContent
 
     - name: Deploy to k3d
+      shell: bash
       run: |
         kubectl apply -f app.yaml
         kubectl rollout restart deployment handson-deployment
         kubectl rollout status deployment handson-deployment
 
     - name: Verify deployment
+      shell: bash
       run: |
         kubectl get pods
         kubectl get svc
