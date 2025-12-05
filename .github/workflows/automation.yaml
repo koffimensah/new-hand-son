@@ -62,8 +62,8 @@ jobs:
       shell: powershell
       run: |
         kubectl apply -f app.yaml
-        kubectl set image deployment/handson-deployment handson=${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:${{ github.sha }}
-        kubectl rollout status deployment handson-deployment
+        kubectl set image deployment/l2n-eks-deployment l2n-eks=${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:${{ github.sha }}
+        kubectl rollout status deployment/l2n-eks-deployment
 
     - name: Verify deployment
       shell: powershell
