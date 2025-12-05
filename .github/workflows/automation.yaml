@@ -45,7 +45,7 @@ jobs:
         context: .
         push: true
         tags: |
-          # ${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:latest   # commented out
+          ${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:latest  
           ${{ secrets.DOCKERHUB_USERNAME }}/hand-son-app:${{ github.sha }}
 
     - name: Image digest
