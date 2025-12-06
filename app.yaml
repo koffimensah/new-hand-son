@@ -16,9 +16,10 @@ spec:
     spec:
       containers:
       - name: l2n-eks
-        image: s5carles/l2n-eks:v0
+        image: koffimensah/hand-son-app:{{TAG}}
+        imagePullPolicy: Never
         ports:
-        - containerPort: 8080   # change if your
+        - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
@@ -32,4 +33,3 @@ spec:
       port: 80
       targetPort: 8080
   type: LoadBalancer
-
